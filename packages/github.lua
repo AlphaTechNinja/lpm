@@ -91,7 +91,7 @@ function github.copyRepo(dest,user,repo,branch,sub)
         end
         files = new
     end
-for i,v in ipairs(github.getFiles(user,repo,branch)) do
+for i,v in ipairs(files) do
     if v == "LICENSE" then
       print("skipping "..repo.."/"..v)
     else
