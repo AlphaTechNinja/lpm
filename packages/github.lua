@@ -79,7 +79,7 @@ end
 --]]
 --installer uses
 function github.copyRepo(dest,user,repo,branch,sub)
-    local files = github.getfiles(user,repo,branch)
+    local files = github.getFiles(user,repo,branch)
     --filter files for sub path
     if sub then
         local new = {}
