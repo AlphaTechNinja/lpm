@@ -78,9 +78,13 @@ return paths
 end
 --]]
 --installer uses
-function github.copyRepo(dest,user,repo,branch)
+function github.copyRepo(dest,user,repo,branch,sub)
 for i,v in ipairs(github.getFiles(user,repo,branch)) do
-print(repo.."/"..v.."->"..fs.combine(dest,v))
+print(repo.."/"..v.."->"..fs.combine(dest,(sub or "")..v))
+local data = github.getFile(user,repo,branch,(sub or "")..v)
+local file = fs.open(fs.combine(dest,(sub or "")..v),"w")
+file.write(data)
+file.close()
 end
 end
 --test
