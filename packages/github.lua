@@ -80,6 +80,9 @@ end
 --installer uses
 function github.copyRepo(dest,user,repo,branch,sub)
 for i,v in ipairs(github.getFiles(user,repo,branch)) do
+    if v == "LICENSE" then
+      print("skipping "..repo.."/"..v)
+    else
 print(repo.."/"..v.."->"..fs.combine(dest,(sub or "")..v))
 local data = github.getFile(user,repo,branch,(sub or "")..v)
 local file = fs.open(fs.combine(dest,(sub or "")..v),"w")
