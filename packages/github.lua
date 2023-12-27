@@ -79,6 +79,18 @@ end
 --]]
 --installer uses
 function github.copyRepo(dest,user,repo,branch,sub)
+    local files = github.getfiles(user,repo,branch)
+    --filter files for sub path
+    if sub then
+        local new = {}
+        for i,v in ipairs(files) do
+            local count = v:gsub(sub.."/".."(%w+)%.%w+","")
+            if count == 1 then
+                table.insert(new,v)
+            end
+        end
+        files = new
+    end
 for i,v in ipairs(github.getFiles(user,repo,branch)) do
     if v == "LICENSE" then
       print("skipping "..repo.."/"..v)
